@@ -13,7 +13,9 @@ class EventoController extends Controller
      */
     public function index()
     {
-        //
+        $eventos = Evento::all();
+
+        return response()->json(['data' => $eventos]);
     }
 
     /**
@@ -29,7 +31,9 @@ class EventoController extends Controller
      */
     public function store(StoreEventoRequest $request)
     {
-        //
+        $eventos = Evento::create($request->all());
+
+        return response()->json($eventos, 201);
     }
 
     /**
@@ -37,7 +41,7 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        //
+        $eventos = Evento::find($evento);
     }
 
     /**
@@ -53,7 +57,13 @@ class EventoController extends Controller
      */
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
-        //
+        $eventos = Evento::find($request);
+
+        if (!$eventos) {
+            return response()->json(['message' => 'Produto não encontrado'], 404);
+        }
+
+        $eventos->update($request->all());
     }
 
     /**
@@ -61,6 +71,14 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        //
+        $eventos = Evento::find($evento);
+
+        if (!$eventos) {
+            return response()->json(['message' => 'Evento não encontrado!'], 404);
+        }
+        
+        $eventos->delete();
+
+        return response()->json(['message' => 'Evento deletado com sucesso!'], 200);
     }
 }

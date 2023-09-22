@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ingressos extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['chaveIngresso','nomeEvento', 'dataEmissao', 'cliente', 'metodoPagamento', 'valorCompra'];
 }

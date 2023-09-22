@@ -11,7 +11,7 @@ class UpdateIngressosRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateIngressosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'chaveIngresso' => 'min:2|max:50|unique:ingressos,chaveIngresso|required',
+            'nomeEvento' => 'min:2|max:50|unique:ingressos,nomeEvento|required',
+            'dataEmissao' => 'min:2|max:50|unique:dataEmissao|required',
+            'cliente' => 'min:2|max:50|unique:ingressos,cliente|required',
+            'metodoPagamento' => 'min:2|max:50|unique:ingressos,metodoPagamento|required',
+            'valorCompra' => 'min:2|max:50|unique:ingressos,valorCompra|required',
         ];
     }
 }
